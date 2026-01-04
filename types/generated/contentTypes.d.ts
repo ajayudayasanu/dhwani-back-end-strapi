@@ -595,6 +595,76 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiProductProduct extends Struct.CollectionTypeSchema {
+  collectionName: 'products';
+  info: {
+    description: 'E-commerce products';
+    displayName: 'Product';
+    pluralName: 'products';
+    singularName: 'product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    availabilityStatus: Schema.Attribute.Enumeration<
+      ['in_stock', 'out_of_stock', 'pre_order', 'made_to_order']
+    > &
+      Schema.Attribute.DefaultTo<'in_stock'>;
+    averageRating: Schema.Attribute.Decimal;
+    careInstructions: Schema.Attribute.RichText;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    compareAtPrice: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    dimensions: Schema.Attribute.Component<'product.dimensions', false>;
+    hasVariants: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    images: Schema.Attribute.Component<'product.product-image', true>;
+    instagramPostUrl: Schema.Attribute.String;
+    inStock: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    isBestseller: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isNew: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    > &
+      Schema.Attribute.Private;
+    lowStockThreshold: Schema.Attribute.Integer;
+    material: Schema.Attribute.String;
+    metaDescription: Schema.Attribute.Text;
+    metaKeywords: Schema.Attribute.JSON;
+    metaTitle: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceRange: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    relatedProducts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product.product'
+    >;
+    returnPolicy: Schema.Attribute.RichText;
+    reviewCount: Schema.Attribute.Integer;
+    shippingInfo: Schema.Attribute.RichText;
+    shortDescription: Schema.Attribute.Text;
+    sku: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    stockQuantity: Schema.Attribute.Integer;
+    subcategory: Schema.Attribute.String;
+    tags: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    variants: Schema.Attribute.Component<'product.product-variant', true>;
+    variantType: Schema.Attribute.String;
+    videoUrl: Schema.Attribute.String;
+    weight: Schema.Attribute.Decimal;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1110,6 +1180,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::product.product': ApiProductProduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

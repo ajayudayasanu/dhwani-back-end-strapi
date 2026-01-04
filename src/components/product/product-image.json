@@ -1,0 +1,27 @@
+{
+    "collectionName": "components_product_product_images",
+    "info": {
+        "displayName": "Product Image",
+        "icon": "picture",
+        "description": "Image with metadata for products"
+    },
+    "options": {},
+    "attributes": {
+        "media": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos"
+            ],
+            "type": "media",
+            "multiple": false
+        },
+        "alt": {
+            "type": "string"
+        },
+        "isPrimary": {
+            "type": "boolean",
+            "default": false
+        }
+    }
+}

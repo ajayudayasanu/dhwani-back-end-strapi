@@ -1,0 +1,24 @@
+{
+    "collectionName": "components_product_dimensions",
+    "info": {
+        "displayName": "Dimensions",
+        "icon": "ruler",
+        "description": "Physical dimensions of the product"
+    },
+    "options": {},
+    "attributes": {
+        "length": {
+            "type": "decimal"
+        },
+        "width": {
+            "type": "decimal"
+        },
+        "height": {
+            "type": "decimal"
+        },
+        "unit": {
+            "type": "string",
+            "default": "cm"
+        }
+    }
+}
